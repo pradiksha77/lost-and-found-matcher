@@ -1,0 +1,8 @@
+LOST AND FOUND MATCHER SUMMARY
+------------------------------
+Lost reports: 10
+Found reports: 10
+Suggested matches: 9
+No-match lost reports: 1
+Unclaimed found reports: 1
+Possible double claims: 0
