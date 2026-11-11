@@ -1,35 +1,41 @@
-
 # Lost and Found Matcher
 
-## Project Overview
+## 1. Project Overview
 
 Lost and Found Matcher is a Python-based application that helps campus administrators identify possible matches between lost-item and found-item reports.
 
-The system extracts item details, validates information, calculates match scores and generates reports.
+The application uses a local AI model to extract item details, validates the extracted information, compares reports, calculates match scores and generates output files.
 
-## Features
+It assists administrators in finding possible matches, but human verification is required before returning any item.
+
+## 2. Features
 
 - Reads lost and found reports from CSV files.
-- Extracts item details from descriptions.
-- Validates extracted information.
-- Compares lost and found reports.
+- Uses AI to extract item details from descriptions.
+- Validates extracted information against original reports.
+- Compares every lost report with found reports.
 - Calculates matching scores.
-- Explains why two reports match.
-- Identifies possible double claims.
+- Explains why reports match.
+- Rejects conflicting item details.
+- Identifies possible duplicate claims.
 - Generates CSV and text output reports.
-- Supports human review before returning items.
+- Includes matching and red-team tests.
+- Supports human verification before returning items.
 
-## Technologies Used
+## 3. Technologies Used
 
 - Python
+- Qwen 2.5 (0.5B)
+- Ollama
 - CSV
 - Regular Expressions
-- Pandas (if used in the final implementation)
-- LLM API (planned integration)
+- Requests
+- Pandas (where used in the implementation)
 
-## Project Structure
+## 4. Project Structure
 
-Lost_and_Found_Matcher/
+```text
+lost and found matcher/
 │
 ├── data/
 │   ├── lost.csv
@@ -46,55 +52,114 @@ Lost_and_Found_Matcher/
 ├── validator.py
 ├── llm_extractor.py
 ├── test_matcher.py
-├── test_red_team.py
+├── test_redteam.py
 ├── system_prompt.txt
 ├── judgment_framework.md
-├── cost_latency.md
-└── README.md
+├── cost_latency_note.md
+├── ai_decision_journal.md
+├── reflection.md
+├── README.md
+└── .gitignore
+```
 
-## How to Run
+## 5. Requirements
 
-### 1. Create a virtual environment
+- Python
+- Ollama
+- Qwen 2.5 (0.5B) model
 
+## 6. Installation and Setup
+
+### Step 1: Create a virtual environment
+
+```powershell
 uv venv .venv
+```
 
-### 2. Activate the environment (Windows PowerShell)
+### Step 2: Activate the environment
 
-.\.venv\Scripts\Activate.ps1
+```powershell
+.venv\Scripts\Activate.ps1
+```
 
-### 3. Install dependencies
+### Step 3: Install dependencies
 
+```powershell
 uv pip install pandas python-dotenv requests
+```
 
-### 4. Run the application
+### Step 4: Set up Ollama
 
+Install Ollama and download the model:
+
+```powershell
+ollama pull qwen2.5:0.5b
+```
+
+Make sure Ollama is running before starting the application.
+
+## 7. How to Run
+
+Run the main application:
+
+```powershell
 python main.py
+```
 
-## Testing
+The application processes the lost and found reports and generates the output files in the outputs folder.
+
+## 8. Testing
 
 Run the matching tests:
 
+```powershell
 python test_matcher.py
+```
 
 Run the red-team tests:
 
-python test_red_team.py
+```powershell
+python test_redteam.py
+```
 
-## Output Files
+The red-team tests check vague claims, brand guessing and malicious instructions.
 
-- matches.csv: Suggested matching pairs.
-- no_match.csv: Lost reports without suggestions.
-- unclaimed.csv: Found reports without suggestions.
-- summary.txt: Overall processing summary.
+## 9. Output Files
 
-## Human Verification
+| File | Description |
+|---|---|
+| matches.csv | Suggested matching pairs with scores and reasons |
+| no_match.csv | Lost reports without suggested matches |
+| unclaimed.csv | Found reports without suggested matches |
+| summary.txt | Overall processing summary |
+
+## 10. Matching Rules
+
+- Same item category is required.
+- Reports more than 30 days apart are rejected.
+- Different known colours are rejected.
+- Different known brands are rejected.
+- Same colour gives 2 points.
+- Same brand gives 2 points.
+- Same place gives 1 point.
+- A score of 3 or more is classified as Likely.
+- A score of 1 or 2 is classified as Possible.
+- Items categorized as other are not automatically matched.
+
+## 11. Human Verification
 
 The application only suggests possible matches.
 
-A campus administrator must verify ownership before returning any item.
+A campus administrator must verify the claimant and check ownership before returning an item. The AI system never makes the final ownership decision.
 
-## Current Development Status
+## 12. Current Development Status
 
-The current prototype uses a temporary rule-based extraction method.
+The working prototype uses Qwen 2.5 (0.5B) through Ollama for local AI extraction.
 
-Real LLM API integration, API cost measurement and final evaluation are still pending.
+The application successfully processed 10 lost reports and 10 found reports in the demonstration dataset and generated 9 suggested matches.
+
+Matching tests and three red-team scenarios have also been prepared and tested.
+
+## 13. Conclusion
+
+This project demonstrates how AI and Python can help campus administrators manage lost and found reports more efficiently while keeping human verification as an essential part of the process.

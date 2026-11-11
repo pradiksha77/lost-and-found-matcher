@@ -1,32 +1,48 @@
 
 # Judgment Framework
-## Lost and Found Matcher
+## AI-Based Lost and Found Matcher
 
-| Decision | System Responsibility | Human Responsibility |
-|---|---|---|
-| Item identification | Extract item category | Check unclear item descriptions |
-| Colour identification | Extract explicitly mentioned colour | Verify if colour is uncertain |
-| Brand identification | Extract brand only when mentioned | Ask claimant to confirm brand |
-| Place identification | Extract mentioned campus location | Confirm exact location if needed |
-| Match scoring | Calculate score using Python rules | Review suggested matches |
-| Likely match | Display as a strong suggestion | Verify ownership before returning item |
-| Possible match | Display as a possible suggestion | Investigate further |
-| Double claims | Flag found items linked to multiple lost reports | Resolve the claims |
-| No match | Report when no suitable match exists | Help the student search further |
+### 1. Purpose
 
-## Human Checkpoint
+The purpose of this framework is to explain which tasks can be handled by AI and which decisions require human involvement.
 
-The application must never decide ownership automatically.
+The AI system helps college administrators find possible matches between lost and found item reports. However, it cannot decide who owns an item.
 
-When a possible or likely match is found:
+### 2. Decision Responsibility Table
 
-1. The administrator reviews the suggested match.
-2. The claimant is asked to provide an additional detail that is not already present in either report.
-3. The administrator checks the answer.
-4. Only the administrator can approve the claim and return the item.
+| Decision | AI Role | Human Role | Rule |
+|---|---|---|---|
+| Extract item details | Identifies item, colour, brand and place | Checks incorrect details | AI must not guess missing information |
+| Validate reports | Checks required fields and facts | Reviews invalid reports | Only valid information is used |
+| Calculate match score | Compares lost and found reports | Reviews suggested matches | Follow the defined scoring rules |
+| Identify possible matches | Suggests likely and possible matches | Checks the suggestions | AI suggestions are not final decisions |
+| Detect duplicate claims | Flags one found item matched with multiple lost reports | Investigates the claims | Human review is required |
+| Verify ownership | Does not decide ownership | Asks the claimant questions and verifies evidence | Only a human can approve ownership |
+| Return the item | Does not return the item automatically | Authorizes the return | Final approval belongs to the administrator |
 
-## Important Rule
+### 3. Human Checkpoint
 
-AI suggestions are not proof of ownership.
+Before returning an item, the college help desk must verify the claimant.
 
-Final decisions must always be made by a human administrator.
+The administrator should:
+
+1. Ask the claimant to describe one identifying detail that was not included in the original lost and found reports.
+2. Check whether the claimant's answer is consistent with the item.
+3. Request additional proof when necessary.
+4. Approve or reject the claim after verification.
+
+The AI system must never decide ownership or automatically return an item.
+
+### 4. Safety Rules
+
+- AI must not invent missing information.
+- Conflicting item details must be checked.
+- Reports with different known colours or brands must not be matched.
+- Reports more than 30 days apart must not be matched.
+- Items categorized as "other" must not be automatically matched.
+- Multiple claims for one found item must be flagged.
+- A human administrator must make the final ownership decision.
+
+### 5. Conclusion
+
+The AI system is designed to assist college administrators, not replace them. It saves time by identifying possible matches, while human verification ensures that items are returned to the correct owners.

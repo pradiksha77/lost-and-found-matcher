@@ -1,51 +1,58 @@
 
-# Cost and Latency Report
-## Lost and Found Matcher
+# Cost and Latency Note
+## AI-Based Lost and Found Matcher
 
-### 1. Current Implementation
+### 1. AI Model Used
 
-The current version uses a temporary rule-based extractor written in Python.
+This project uses the Qwen 2.5 (0.5B) language model through Ollama.
 
-- AI API calls: 0
-- API cost: 0
-- Report extraction: Performed locally using Python.
-- Matching: Performed using Python logic.
-- CSV output generation: Performed locally.
+The model runs locally on the computer instead of using a paid cloud AI API.
 
-### 2. Planned AI Integration
+### 2. Cost Analysis
 
-In the final version, an LLM API will extract structured information from each lost and found report.
+| Component | Cost |
+|---|---|
+| Qwen 2.5 (0.5B) model | Free to download |
+| Ollama | Free |
+| Python | Free |
+| Required Python libraries | Free |
+| Cloud API usage | Not used |
+| Internet usage during local extraction | Not required |
 
-The system will process each report only once and store its extracted information.
+There is no per-request API charge because the AI model runs locally. However, the computer uses electricity and system resources while processing reports.
 
-Python will perform all pairwise matching without additional LLM calls.
+### 3. Latency Analysis
 
-### 3. Cost Measurement
+Latency means the time taken by the AI system to process a report and return its extracted details.
 
-After connecting the API, the following details will be recorded:
+The processing time depends on:
+- Computer processor speed.
+- Available RAM.
+- Whether GPU acceleration is available.
+- Length of the report.
+- AI model performance.
 
-- AI provider and model name
-- Number of reports processed
-- Total input tokens
-- Total output tokens
-- Cost per report
-- Total API cost
+The project sends one extraction request for each report.
 
-Actual API pricing will be calculated using the provider's published pricing.
+For 10 lost reports and 10 found reports:
+- Lost reports: 10 AI requests.
+- Found reports: 10 AI requests.
+- Total: 20 AI requests per complete run.
 
-### 4. Latency Measurement
+### 4. Advantages of Local AI
 
-After API integration, processing time will be measured.
+- No paid API key is required.
+- Reports can be processed locally.
+- No per-request cloud API charges.
+- Useful for testing and college demonstrations.
 
-The total time will include:
+### 5. Limitations
 
-- Time taken for API extraction
-- Python validation time
-- Matching time
-- Output file generation time
+- Processing may be slower on computers with limited resources.
+- Small models may sometimes produce incorrect information.
+- The model must be downloaded before use.
+- Ollama must be running during processing.
 
-### 5. Conclusion
+### 6. Conclusion
 
-The current prototype does not require an API key or incur API charges.
-
-Actual AI cost and latency measurements will be added after LLM integration and testing.
+Using Qwen 2.5 through Ollama makes this project affordable and suitable for a college-level demonstration. It avoids cloud API charges while allowing the system to extract information from lost and found reports locally.

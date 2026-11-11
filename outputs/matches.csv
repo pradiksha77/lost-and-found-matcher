@@ -1,10 +1,10 @@
 lost_id,found_id,score,status,reasons,double_claim
-L01,F01,5,Likely,Same colour (+2); Same brand (+2); Same place (+1),False
-L03,F03,3,Likely,Same colour (+2); Same place (+1),False
-L04,F04,3,Likely,Same colour (+2); Same place (+1),False
-L05,F05,3,Likely,Same colour (+2); Same place (+1),False
-L06,F06,3,Likely,Same brand (+2); Same place (+1),False
-L07,F07,3,Likely,Same colour (+2); Same place (+1),False
-L08,F08,3,Likely,Same colour (+2); Same place (+1),False
-L10,F10,3,Likely,Same colour (+2); Same place (+1),False
-L09,F09,1,Possible,Same place (+1),False
+L01,F01,5,Likely,"Same colour (+2), Same brand (+2), Same place (+1)",False
+L06,F06,5,Likely,"Same colour (+2), Same brand (+2), Same place (+1)",False
+L03,F03,3,Likely,"Same colour (+2), Same place (+1)",False
+L04,F04,3,Likely,"Same colour (+2), Same place (+1)",False
+L05,F05,3,Likely,"Same colour (+2), Same place (+1)",False
+L07,F07,3,Likely,"Same colour (+2), Same place (+1)",False
+L08,F08,3,Likely,"Same colour (+2), Same place (+1)",False
+L09,F09,3,Likely,"Same colour (+2), Same place (+1)",False
+L10,F10,3,Likely,"Same colour (+2), Same place (+1)",False
